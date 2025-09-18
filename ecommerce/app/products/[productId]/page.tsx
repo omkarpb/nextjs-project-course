@@ -1,5 +1,6 @@
 import NotFoundPage from "@/app/not-found";
 import { Product, products } from "@/app/prdocuts-data";
+import Image from 'next/image';
 
 export default function ProductDetailPage({ params } : { params: { productId: string}}) {
     const currentProduct: Product | undefined = products.find((item: Product) => {
@@ -10,9 +11,15 @@ export default function ProductDetailPage({ params } : { params: { productId: st
         return <NotFoundPage />
     }
     return (
-        <>
-            <h1>{currentProduct?.name}</h1>
-            <h2>{currentProduct?.description}</h2>
-        </>
+        <div className="flex m-8 gap-8">
+            <div className="bg-white p-4 shadow-white shadow-sm rounded-sm">
+                <Image src={'/' + currentProduct.imageUrl} alt="Image" width={200} height={200}/>
+            </div>
+            <div>
+                <h1 className="text-2xl font-bold mb-4">{currentProduct?.name}</h1>
+                <p className="text-sm">${currentProduct.price}</p>
+                <h2 className="text-lg mt-4">{currentProduct?.description}</h2>
+            </div>
+        </div>
     );
 };
