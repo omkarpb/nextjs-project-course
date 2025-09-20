@@ -7,19 +7,19 @@ type Params = {
     userId: string
 };
 
-type Cart = Record<string, string[]>;
+// type Cart = Record<string, string[]>;
 
-const carts: Cart = {
-    '1': ['prod-001', 'prod-002'],
-    '2': ['prod-003']
-};
+// const carts: Cart = {
+//     '1': ['prod-001', 'prod-002'],
+//     '2': ['prod-003']
+// };
 
 export async function GET(request: NextRequest, { params }: { params: Params}) {
-    const userId = params.userId;
+    const { userId } = await params;
     // const productIds = carts[userId] ? carts[userId] : []; 
     const cart = await CartModel.findOne({ userId });
     if (!cart) {
-        return new Response(JSON.stringify({}), {
+        return new Response(JSON.stringify([]), {
             status: 200,
             headers: {
                 'Content-Type': 'application/json'

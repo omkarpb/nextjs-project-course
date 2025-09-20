@@ -10,7 +10,7 @@ type RequestParams = {
 export async function GET(request: NextRequest, { params }: { params: RequestParams}) {
     const productId = await params.productId;
     // const currentProduct = products.find((item) => item.id === productId);
-    const currentProduct = await ProductModel.find({ _id: productId});
+    const currentProduct = await ProductModel.findOne({ _id: productId});
     if (!currentProduct) {
         return new Response('Product not found', {
             status: 404
