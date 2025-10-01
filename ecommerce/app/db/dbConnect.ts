@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 declare global {
-  var mongoose: any; // This must be a `var` and not a `let / const`
+  var mongoose: { conn: unknown, promise: unknown}; // This must be a `var` and not a `let / const`
 }
 
 let cached = global.mongoose;

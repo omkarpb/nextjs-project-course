@@ -3,9 +3,9 @@ import { NextRequest } from "next/server";
 import CartModel from "@/app/db/models/CartModel";
 import ProductModel from "@/app/db/models/ProductModel";
 
-type Params = {
-    userId: string
-};
+// type Params = {
+//     userId: string
+// };
 
 // type Cart = Record<string, string[]>;
 
@@ -14,7 +14,7 @@ type Params = {
 //     '2': ['prod-003']
 // };
 
-export async function GET(request: NextRequest, { params }: { params: Params}) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ userId: string }>}) {
     const { userId } = await params;
     // const productIds = carts[userId] ? carts[userId] : []; 
     const cart = await CartModel.findOne({ userId });
@@ -41,8 +41,8 @@ type RequestBody = {
     productId: string,
 };
 
-export async function POST(request: NextRequest, { params }: { params: Params}) {
-    const userId = params.userId;
+export async function POST(request: NextRequest, { params }: { params: Promise<{ userId: string }>}) {
+    const { userId } = await params;
     const body: RequestBody = await request.json();
     const cartFound = await CartModel.findOne({ userId });
     if (cartFound) {
@@ -68,12 +68,12 @@ export async function POST(request: NextRequest, { params }: { params: Params}) 
     })
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: Params}) {
-    const userId = params.userId;
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ userId: string }>}) {
+    const { userId } = await params;
     const body: RequestBody = await request.json();
     const cartFound = await CartModel.findOne({ userId });
     if (cartFound) {
-        const ids = cartFound.productIds.filter((id) => id !== body.productId);
+        const ids = cartFound.productIds.filter((id: string) => id !== body.productId);
         await CartModel.updateOne({ userId }, { productIds: ids });
         const cart = await CartModel.findOne({ userId });
         const prods = await ProductModel.find({ _id : { $in : cart.productIds }});

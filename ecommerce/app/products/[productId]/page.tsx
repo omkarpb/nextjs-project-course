@@ -1,9 +1,8 @@
 import NotFoundPage from "@/app/not-found";
-import { Product, products } from "@/app/prdocuts-data";
 import Image from 'next/image';
 
 export default async function ProductDetailPage({ params } : { params: { productId: string}}) {
-    const response = await fetch('https://glowing-waffle-7v5vppg9g9q3rv-3000.app.github.dev/api/products/' + params.productId);
+    const response = await fetch(process.env.NEXT_PULIC_SITE_URL + '/api/products/' + params.productId);
     const currentProduct = await response.json();
     // const currentProduct: Product | undefined = products.find((item: Product) => {
     //     return item.id === params.productId

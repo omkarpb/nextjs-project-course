@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 export interface CartType extends mongoose.Document {
-    userId: String,
-    productIds: [String]
+    userId: string,
+    productIds: [string]
 }
 
 /* PetSchema will correspond to a collection in your MongoDB database. */

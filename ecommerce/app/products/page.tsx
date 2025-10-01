@@ -1,7 +1,8 @@
+
 import ProductList from '@/app/components/ProductList';
 // import { products } from '@/app/prdocuts-data';
 export default async function ProductsPage() {
-    const response = await fetch('https://glowing-waffle-7v5vppg9g9q3rv-3000.app.github.dev/api/products')
+    const response = await fetch(process.env.NEXT_PULIC_SITE_URL + '/api/products')
     const products = await response.json();
     return  (
         <div className='m-8'>

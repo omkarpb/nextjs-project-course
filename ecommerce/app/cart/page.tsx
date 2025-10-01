@@ -1,8 +1,10 @@
-import { Product, products } from "../prdocuts-data";
+import RemoveFromCart from "../components/RemoveFromCart";
+import { Product } from "../prdocuts-data";
 import Link from "next/link";
+import dynamic from 'next/dynamic'
 
 export default async function CartPage() {
-    const response = await fetch('https://glowing-waffle-7v5vppg9g9q3rv-3000.app.github.dev/api/cart/1');
+    const response = await fetch(process.env.NEXT_PULIC_SITE_URL + '/api/cart/1');
     const cartProducts = await response.json();
     return (
         <div className='m-8'>
@@ -11,6 +13,7 @@ export default async function CartPage() {
                 <Link key={item!._id} href={`/products/${item!._id}`} className="mt-4">
                     <h1 className='text-xl font-bold mb-4'>{item?.name}</h1>
                     <p>${item!.price}</p>
+                    <RemoveFromCart productId={item._id} />
                 </Link>
             ))}
         </div>
