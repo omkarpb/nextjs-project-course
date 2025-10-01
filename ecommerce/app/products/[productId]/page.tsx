@@ -1,5 +1,6 @@
 import NotFoundPage from "@/app/not-found";
 import Image from 'next/image';
+export const dynamic = 'force-dynamic';
 
 export default async function ProductDetailPage({ params } : { params: { productId: string}}) {
     const response = await fetch(process.env.NEXT_PULIC_SITE_URL + '/api/products/' + params.productId);

@@ -10,7 +10,7 @@ if (!cached) {
 }
 
 async function dbConnect() {
-  const MONGODB_URI = process.env.MONGODB_URI! || "mongodb+srv://omkarbadve10:cSZwQ7eurGiSRVGd@cluster0.nnxvc7w.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0";
+  const MONGODB_URI = process.env.MONGODB_URI! || `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.nnxvc7w.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0`;
 
   if (!MONGODB_URI) {
     throw new Error(

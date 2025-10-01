@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "../prdocuts-data";
 import AddToCartButton from './AddToCartButton';
+export const dynamic = 'force-dynamic';
 
 export default async function ProductList({ products }: {products: Product[]}) {
     // const addToCartHandler = async (e: any, productId: string) => {

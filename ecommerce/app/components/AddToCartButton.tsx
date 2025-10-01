@@ -1,5 +1,5 @@
 'use client';
-import dynamic from 'next/dynamic'
+export const dynamic = 'force-dynamic';
 
 export default function AddToCartButton({ productId }: { productId: string }) {
     const addToCartHandler = async (productId: string) => {

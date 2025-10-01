@@ -1,7 +1,8 @@
 import RemoveFromCart from "../components/RemoveFromCart";
 import { Product } from "../prdocuts-data";
 import Link from "next/link";
-import dynamic from 'next/dynamic'
+
+export const dynamic = 'force-dynamic';
 
 export default async function CartPage() {
     const response = await fetch(process.env.NEXT_PULIC_SITE_URL + '/api/cart/1');
